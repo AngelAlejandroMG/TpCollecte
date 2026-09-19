@@ -1,0 +1,31 @@
+{
+  "places": [
+    {
+      "id": "plc_1789339839152",
+      "name": "Bibliothèque principale",
+      "description": "Espace calme avec prises.",
+      "category": "STUDY_SPACE",
+      "address": "Pavillon A, local A-210",
+      "services": [
+        "WIFI",
+        "POWER_OUTLETS"
+      ],
+      "status": "ACTIVE",
+      "averageRating": null,
+      "reviewCount": 0,
+      "createdAt": "2026-09-13T22:50:39.152Z",
+      "updatedAt": "2026-09-13T22:50:39.152Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_1789339885079",
+      "placeId": "plc_1789339839152",
+      "authorName": "Angel",
+      "rating": 1,
+      "comment": "fuck le cours",
+      "createdAt": "2026-09-13T22:51:25.079Z",
+      "updatedAt": "2026-09-13T22:51:25.079Z"
+    }
+  ]
+}
