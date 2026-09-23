@@ -116,4 +116,4 @@ Les données sont conservées dans un fichier JSON local (`data/db.json` par dé
 
 ## Usage de l'intelligence artificielle
 
-Une IA générative a été utilisée comme à la compréhension de messages d'erreur et au diagnostic de problèmes de configuration (NestJS, Git). Les décisions de conception de l'API (nommage des ressources, structure des URI, codes de statut). 
+Une IA générative a été utilisée pour la compréhension du tp, des messages d'erreur, la création du README et au diagnostic de problèmes de configuration (NestJS, Git). 
