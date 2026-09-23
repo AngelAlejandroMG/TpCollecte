@@ -33,6 +33,11 @@ L'API permet de créer, consulter, filtrer, modifier et supprimer ces ressources
 - `node:fs/promises` pour la persistance JSON asynchrone
 - Postman / Swagger UI pour les essais manuels
 
+## Installation
+
+```bash
+npm ci
+```
 
 ## Configuration
 
@@ -55,6 +60,16 @@ L'application refuse de démarrer si une configuration obligatoire est absente o
 # Mode développement (rechargement automatique)
 npm run start:dev
 
+# Mode production
+npm run build
+npm run start:prod
+```
+
+## Lint et compilation
+
+```bash
+npm run lint
+npm run build
 ```
 
 ## Documentation Swagger UI
@@ -103,6 +118,21 @@ Toutes les routes sont préfixées par une version majeure explicite dans le che
 | Code 409 | Suppression d'un endroit avec appréciations | Conflit avec l'état courant de la ressource, pas une erreur de validation |
 | Pagination | `{ data: [], pagination: {...} }` | Sépare clairement les données des métadonnées, format prévisible pour le client |
 
+## Format des erreurs
+
+Toutes les erreurs suivent le format **Problem Details** (`application/problem+json`) :
+
+```json
+{
+  "type": "https://httpstatuses.com/404",
+  "title": "Not Found",
+  "status": 404,
+  "detail": "Aucun endroit trouvé avec l'id : plc_123",
+  "instance": "/api/v1/places/plc_123"
+}
+```
+
+Une erreur interne inattendue ne révèle jamais la pile d'exécution, un chemin local ou le contenu brut d'un fichier.
 
 ## Persistance
 
@@ -116,4 +146,4 @@ Les données sont conservées dans un fichier JSON local (`data/db.json` par dé
 
 ## Usage de l'intelligence artificielle
 
-Une IA générative a été utilisée comme à la compréhension de messages d'erreur et au diagnostic de problèmes de configuration (NestJS, Git). Les décisions de conception de l'API (nommage des ressources, structure des URI, codes de statut). 
+Une IA générative a été utilisée comme aide à la rédaction, à la compréhension de messages d'erreur et au diagnostic de problèmes de configuration (NestJS, Git). Les décisions de conception de l'API (nommage des ressources, structure des URI, codes de statut) demeurent des choix assumés et compris par l'auteur. La déclaration complète est disponible via IAGraphie, fournie séparément de ce dépôt.
