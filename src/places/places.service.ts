@@ -16,7 +16,7 @@ export class PlacesService {
         const places = await this.persistenceService.readData<Place>(this.KEY);
 
         const now = new Date().toISOString();
-        const newPlace: Place = {
+        const nPlace: Place = {
             id: `plc_${Date.now()}`,
             name: dto.name,
             description: dto.description,
@@ -29,11 +29,11 @@ export class PlacesService {
             createdAt: now,
             updatedAt: now,
         };
-        places.push(newPlace);
+        places.push(nPlace);
 
         await this.persistenceService.saveData<Place>(this.KEY, places);
         
-        return newPlace;
+        return nPlace;
     }
 
     async findAll(paginationDto: PaginationPlaceDto) {
