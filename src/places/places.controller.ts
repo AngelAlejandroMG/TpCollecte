@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Delete, Query, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { PlacesService } from './places.service.js';
 import { CreatePlaceDto } from './dto/create-place.dto.js';
 import { UpdatePlaceDto } from './dto/update-place.dto.js';
 import { PaginationPlaceDto } from './dto/pagination-place.dto.js';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiOperation, ApiTags, ApiOkResponse, ApiParam, ApiNotFoundResponse, ApiConflictResponse, ApiNoContentResponse } from '@nestjs/swagger';
 import { Place } from './schemas/place.shema.js';
+import { Controller, Get, Post, Body, Patch, Delete, Query, HttpCode, HttpStatus, Param, Res } from '@nestjs/common';
+import type { Response } from 'express';
 
 @ApiTags('Places')
 @Controller('api/v1/places')
@@ -19,8 +20,10 @@ export class PlacesController {
     })
     @ApiCreatedResponse({ description: 'Endroit créé avec succès.', type: Place })
     @ApiBadRequestResponse({ description: 'Données d’entrée invalides.' })
-    create(@Body() createPlaceDto: CreatePlaceDto) {
-        return this.placesService.create(createPlaceDto);
+    async create(@Body() createPlaceDto: CreatePlaceDto, @Res({ passthrough: true }) res: Response) {
+        const place = await this.placesService.create(createPlaceDto);
+        res.location(`/api/v1/places/${place.id}`);
+        return place;
     }
 
     @Get()

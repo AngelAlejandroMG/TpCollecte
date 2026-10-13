@@ -6,10 +6,14 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { PlacesModule } from './places/places.module.js';
 import { ReviewsModule } from './reviews/reviews.module.js';
+import { envValidationSchema } from './config/env.validation.js';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema: envValidationSchema,
+    }),
 
     MongooseModule.forRootAsync({
       inject: [ConfigService],
@@ -20,10 +24,10 @@ import { ReviewsModule } from './reviews/reviews.module.js';
           new Logger('MongoDB').log(
             `Connecté à "${connection.name}" sur ${connection.host}`,
           );
-        return connection;
-      },
+          return connection;
+        },
       }),
-    }), 
+    }),
     PlacesModule,
     ReviewsModule,
   ],
