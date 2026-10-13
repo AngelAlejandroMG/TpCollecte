@@ -1,10 +1,10 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { isValidObjectId, Model } from 'mongoose';
 import { CreatePlaceDto } from './dto/create-place.dto.js';
 import { UpdatePlaceDto } from './dto/update-place.dto.js';
 import { PaginationPlaceDto } from './dto/pagination-place.dto.js';
 import { Place, PlaceDocument } from './schemas/place.shema.js';
+import { isObjectIdOrHexString, Model, Types } from 'mongoose';
 
 @Injectable()
 export class PlacesService {
@@ -73,9 +73,19 @@ export class PlacesService {
     await place.deleteOne();
   }
 
-  private assertValidId(id: string): void {
-    if (!isValidObjectId(id)) {
-      throw new BadRequestException(`Identifiant invalide : ${id}`);
+    private assertValidId(id: string): void {
+        if (!isObjectIdOrHexString(id)) {
+        throw new BadRequestException(`Identifiant invalide : ${id}`);
+     }
     }
+
+  async updateRatingStats(
+    placeId: Types.ObjectId,
+    averageRating: number | null,
+    reviewCount: number,
+  ): Promise<void> {
+    await this.placeModel
+      .updateOne({ _id: placeId }, { averageRating, reviewCount }, { runValidators: true })
+      .exec();
   }
 }

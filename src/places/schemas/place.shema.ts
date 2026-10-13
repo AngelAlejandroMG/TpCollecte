@@ -26,7 +26,7 @@ export class Place {
   description: string;
 
   @ApiProperty({ enum: PlaceCategory })
-  @Prop({ required: true, enum: Object.values(PlaceCategory), index: true })
+  @Prop({ type: String, required: true, enum: Object.values(PlaceCategory), index: true })
   category: PlaceCategory;
 
   @ApiProperty({ example: 'Pavillon A, local A-210' })

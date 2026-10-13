@@ -7,6 +7,7 @@ import { Place, PlaceSchema } from './schemas/place.shema.js';
 @Module({
   imports: [MongooseModule.forFeature([{ name: Place.name, schema: PlaceSchema }])],
   controllers: [PlacesController],
-  providers: [PlacesService],// ReviewsService en aura besoin pour la moyenne
+  providers: [PlacesService],
+  exports: [PlacesService],
 })
 export class PlacesModule {}

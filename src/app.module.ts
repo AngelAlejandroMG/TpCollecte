@@ -4,7 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { PersistenceModule } from './persistence/persistence.module.js';
 import { PlacesModule } from './places/places.module.js';
 import { ReviewsModule } from './reviews/reviews.module.js';
 
@@ -24,9 +23,7 @@ import { ReviewsModule } from './reviews/reviews.module.js';
         return connection;
       },
       }),
-    }),
-
-    PersistenceModule, 
+    }), 
     PlacesModule,
     ReviewsModule,
   ],

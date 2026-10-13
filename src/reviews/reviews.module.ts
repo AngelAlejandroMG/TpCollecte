@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ReviewsService } from './reviews.service.js';
 import { ReviewsController } from './reviews.controller.js';
-import { PersistenceModule } from '../persistence/persistence.module.js';
+import { Review, ReviewSchema } from './schemas/review.schema.js';
+import { PlacesModule } from '../places/places.module.js';
+
 @Module({
-  providers: [ReviewsService],
+  imports: [
+    MongooseModule.forFeature([{ name: Review.name, schema: ReviewSchema }]),
+    PlacesModule,
+  ],
   controllers: [ReviewsController],
-  imports: [PersistenceModule],
+  providers: [ReviewsService],
 })
 export class ReviewsModule {}
