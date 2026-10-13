@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 import { PlacesService } from './places.service.js';
 import { PlacesController } from './places.controller.js';
-import { PersistenceModule } from '../persistence/persistence.module.js';
+import { Place, PlaceSchema } from './schemas/place.shema.js';
 
 @Module({
-  providers: [ PlacesService],
-  imports: [PersistenceModule],
+  imports: [MongooseModule.forFeature([{ name: Place.name, schema: PlaceSchema }])],
   controllers: [PlacesController],
-  exports: [PlacesService],
+  providers: [PlacesService],// ReviewsService en aura besoin pour la moyenne
 })
 export class PlacesModule {}
