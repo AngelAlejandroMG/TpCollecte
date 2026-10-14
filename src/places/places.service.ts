@@ -73,11 +73,11 @@ export class PlacesService {
     await place.deleteOne();
   }
 
-    private assertValidId(id: string): void {
-        if (!isObjectIdOrHexString(id)) {
-        throw new BadRequestException(`Identifiant invalide : ${id}`);
-     }
+  private assertValidId(id: string): void {
+    if (!isObjectIdOrHexString(id)) {
+      throw new BadRequestException(`Identifiant invalide : ${id}`);
     }
+  }
 
   async updateRatingStats(
     placeId: Types.ObjectId,

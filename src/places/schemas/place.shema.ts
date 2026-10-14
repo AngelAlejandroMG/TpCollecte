@@ -30,7 +30,7 @@ export class Place {
   category: PlaceCategory;
 
   @ApiProperty({ example: 'Pavillon A, local A-210' })
-  @Prop({ required: true, trim: true })
+  @Prop({ required: true, trim: true, maxlength: 200 })
   address: string;
 
   @ApiProperty({ type: [String], example: ['WIFI', 'POWER_OUTLETS'] })
